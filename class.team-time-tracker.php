@@ -27,9 +27,38 @@ class TeamTimeTracker {
 	}
 
 	public function admin_page() {
+		wp_enqueue_style(
+			'team-time-tracker-css',
+			plugin_dir_url( __FILE__ ) . 'admin/dist/static/css/app.css',
+			array(),
+			'1', // TODO: Generate an updated version for dev
+			true
+		);
+
+		wp_enqueue_script(
+			'team-time-tracker-manifest',
+			plugin_dir_url( __FILE__ ) . 'admin/dist/static/js/manifest.js',
+			array(),
+			'1', // TODO: Generate an updated version for dev
+			true
+		);
+		wp_enqueue_script(
+			'team-time-tracker-vendor',
+			plugin_dir_url( __FILE__ ) . 'admin/dist/static/js/vendor.js',
+			array(),
+			'1', // TODO: Generate an updated version for dev
+			true
+		);
+		wp_enqueue_script(
+			'team-time-tracker-app',
+			plugin_dir_url( __FILE__ ) . 'admin/dist/static/js/app.js',
+			array(),
+			'1', // TODO: Generate an updated version for dev
+			true
+		);
+
 		echo( '<div class="wrap">' );
-		echo( '<h1 class="wp-heading-inline">Team Time Tracker</h1>' );
-		echo( '<p>Hello, this is the Team Time Tracker Administrative page.</p>' );
+		echo( '  <div id="app"></div>' );
 		echo( '</div>' );
 	}
 }
