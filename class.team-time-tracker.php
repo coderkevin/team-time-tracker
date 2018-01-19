@@ -27,6 +27,7 @@ class TeamTimeTracker {
 	}
 
 	public function admin_page() {
+		/*
 		wp_enqueue_style(
 			'team-time-tracker-css',
 			plugin_dir_url( __FILE__ ) . 'admin/dist/static/css/app.css',
@@ -34,31 +35,21 @@ class TeamTimeTracker {
 			'1', // TODO: Generate an updated version for dev
 			true
 		);
+		*/
 
 		wp_enqueue_script(
-			'team-time-tracker-manifest',
-			plugin_dir_url( __FILE__ ) . 'admin/dist/static/js/manifest.js',
-			array(),
-			'1', // TODO: Generate an updated version for dev
-			true
+			'team-time-tracker-admin',
+			plugin_dir_url( __FILE__ ) . 'admin/team-time-tracker-admin.bundle.js',
+			array( 'wp-blocks' ),
+			filemtime( plugin_dir_path( __FILE__ ) . 'admin/team-time-tracker-admin.bundle.js' )
 		);
-		wp_enqueue_script(
-			'team-time-tracker-vendor',
-			plugin_dir_url( __FILE__ ) . 'admin/dist/static/js/vendor.js',
-			array(),
-			'1', // TODO: Generate an updated version for dev
-			true
-		);
-		wp_enqueue_script(
-			'team-time-tracker-app',
-			plugin_dir_url( __FILE__ ) . 'admin/dist/static/js/app.js',
-			array(),
-			'1', // TODO: Generate an updated version for dev
-			true
-		);
+
+		wp_enqueue_style( 'wp-components' );
+		wp_enqueue_style( 'wp-blocks' );
+		wp_enqueue_style( 'wp-edit_blocks' );
 
 		echo( '<div class="wrap">' );
-		echo( '  <div id="app"></div>' );
+		echo( '  <div id="team-time-tracker-page"></div>' );
 		echo( '</div>' );
 	}
 }
