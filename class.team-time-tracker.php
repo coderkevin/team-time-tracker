@@ -26,7 +26,8 @@ class TeamTimeTracker {
 		);
 	}
 
-	public function admin_page() {
+	public function admin_page( $hook ) {
+		require_once( ABSPATH . 'wp-admin/admin-header.php' );
 		/*
 		wp_enqueue_style(
 			'team-time-tracker-css',
@@ -36,6 +37,8 @@ class TeamTimeTracker {
 			true
 		);
 		*/
+
+		gutenberg_editor_prepare_scripts_and_styles();
 
 		wp_enqueue_script(
 			'team-time-tracker-admin',
