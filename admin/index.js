@@ -3,11 +3,18 @@ import { registerBlocks as registerAdminBlocks } from './blocks';
 const { __ } = wp.i18n;
 const { render } = wp.element;
 const { createBlockEditor } = wp.editor;
-const { registerBlockType, InnerBlocks } = wp.blocks;
+const { registerBlockType, getBlockTypes, InnerBlocks } = wp.blocks;
 
-const blockRegistry = {};
+const adminBlocks = {};
+const globalBlocks = {};
 
-registerAdminBlocks( blockRegistry );
+registerAdminBlocks( adminBlocks );
+getBlockTypes().forEach( ( block ) => {
+	globalBlocks[ block.name ] = block;
+} );
+
+// Make a registry that contains the global blocks and our own special admin blocks.
+const blockRegistry = { ...globalBlocks, ...adminBlocks };
 
 /*
 registerBlockType( 'team-time-tracker/section', {
