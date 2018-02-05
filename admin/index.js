@@ -2,7 +2,7 @@ import { registerBlocks as registerAdminBlocks } from './blocks';
 
 const { __ } = wp.i18n;
 const { render } = wp.element;
-const { createBlockEditor } = wp.editor;
+const { createBlockEditor, createTemplateEditor } = wp.editor;
 const { registerBlockType, getBlockTypes, InnerBlocks } = wp.blocks;
 
 const adminBlocks = {};
@@ -42,6 +42,10 @@ registerBlockType( 'team-time-tracker/section', {
 }, blockRegistry );
 */
 
+const template = [
+	[ 'core/heading', { nodeName: 'h2', content: [ 'Team Time Tracker' ] } ],
+	[ 'team-time-tracker/post-list', {} ],
+];
 const attributes = { message: 'It worked!' };
 const settings = {
 	blockRegistry
@@ -51,10 +55,14 @@ wp.api.init().then( function() {
 	console.log( 'creating block editor.' );
 	console.log( 'blockRegistry: ', blockRegistry );
 
+	createTemplateEditor( 'team-time-tracker-page', template, attributes, settings );
+
+	/*
 	createBlockEditor(
 		'team-time-tracker-page',
 		'team-time-tracker/admin-page',
 		attributes,
 		settings
 	);
+	*/
 } );
